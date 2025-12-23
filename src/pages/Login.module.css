@@ -1,0 +1,61 @@
+/* Centers entire page */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f5f6fa;
+}
+
+/* Card box */
+.container {
+  width: 350px;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Title */
+.title {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Inputs */
+.input {
+  width: 85%;
+  padding: 12px;
+  margin: 12px auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Button */
+.button {
+  width: 90%;
+  padding: 12px;
+  background: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background: #0056b3;
+}
+
+/* Register link */
+.link {
+  margin-top: 15px;
+  cursor: pointer;
+  color: #007bff;
+  font-weight: 500;
+}

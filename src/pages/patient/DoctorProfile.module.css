@@ -1,0 +1,109 @@
+.container {
+  padding: 32px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+/* DATE ROW */
+.daysRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+/* DATE CARD */
+.dayBtn {
+  padding: 14px 10px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  background: blue;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.dayBtn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* ACTIVE DATE */
+.active {
+  background: green;
+  color: #ffffff;
+  border-color: green;
+}
+
+/* SLOTS GRID */
+.slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+/* SLOT CARD */
+.slot {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: green;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.slot:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* SELECTED SLOT */
+.slot.active {
+  background: #0d6efd;
+  color: #ffffff;
+  border-color: #0d6efd;
+}
+
+/* BOOKED SLOT */
+.booked {
+  background: #fdecea;
+  color: #dc3545;
+  border-color: #dc3545;
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+/* CONTINUE BUTTON */
+.bookBtn {
+  width: 100%;
+  background: #198754;
+  color: #ffffff;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bookBtn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}

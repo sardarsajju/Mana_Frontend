@@ -1,0 +1,33 @@
+.main {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.content {
+  flex: 1;
+  padding: 25px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.section {
+  margin-top: 24px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

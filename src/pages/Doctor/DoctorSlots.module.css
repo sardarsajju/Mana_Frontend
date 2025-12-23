@@ -1,0 +1,116 @@
+.container {
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dateInput {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+}
+
+.dateInput:focus {
+  border-color: #0d6efd;
+}
+/* SLOTS GRID (side-by-side cards) */
+.slotsWrapper {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 12px;
+}
+
+/* SLOT CARD */
+.slot {
+  padding: 12px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+}
+
+/* SLOT HOVER */
+.slot:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* AVAILABLE SLOT */
+.available {
+  background-color: #eafaf1;
+  color: #198754;
+  border-color: #198754;
+  font-weight: 600;
+}
+
+/* BOOKED SLOT */
+.booked {
+  background-color: #fdecea;
+  color: #dc3545;
+  border-color: #dc3545;
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+/* OPTIONAL: SELECTED SLOT (patient side) */
+.selected {
+  background-color: #0d6efd;
+  color: #ffffff;
+  border-color: #0d6efd;
+}
+
+
+/* EMPTY STATE */
+.empty {
+  color: #888;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.addScheduleBtn {
+  padding: 8px 14px;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+      width: fit-content;
+}
+
+.addScheduleBtn:hover {
+  background-color: #0b5ed7;
+}
+
+
+
+.deleteScheduleBtn {
+  padding: 8px 14px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.deleteScheduleBtn:hover {
+  background-color: #bb2d3b;
+}
