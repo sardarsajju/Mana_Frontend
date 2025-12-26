@@ -1,0 +1,41 @@
+.container {
+  padding: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.card h3 {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.card p {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+.inProgress p {
+  color: #fd7e14;
+}
+
+.completed p {
+  color: #198754;
+}
+
+.cancelled p {
+  color: #dc3545;
+}

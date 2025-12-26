@@ -1,42 +1,22 @@
 
-import Sidebar from "../Sidebar";
-import Topbar from "../Topbar";
-import StatsCards from "../StatsCards";
+import Sidebar from "./Sidebar.jsx";
+import Topbar from "./Topbar.jsx";
+import StatsCards from "./StatsCards.jsx";
 import DoctorSlots from "./DoctorSlots";
 import DoctorAppointments from "./DoctorAppointments.jsx";
 
 import { useSelector } from "react-redux";
 import styles from "./DoctorDashboard.module.css";
 
-// function DoctorDashboard() {
-//   const user = useSelector((state) => state.user);
-//   const doctorName = user?.name || "Doctor";
-
-//   return (
-//     <div className={styles.main}>
-//       <Sidebar />
-
-//       <div className={styles.content}>
-//         <Topbar name={doctorName} />
-
-//         <StatsCards />
-
-//         <div className={styles.grid}>
-//           <TodayAppointments />
-//           <PatientList />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
 
 function DoctorDashboard() {
   const user = useSelector((state) => state.user);
 
   const doctorName = user?.name || "Doctor";
-  const doctorId = user?.login_id;   // 🔑 important
+  const doctorId = user?.login_id;   
 
   console.log(doctorName);
+  console.log(doctorId)
 
   return (
     <div className={styles.main}>
@@ -45,7 +25,7 @@ function DoctorDashboard() {
       <div className={styles.content}>
         <Topbar name={doctorName} />
 
-        <StatsCards />
+        <StatsCards doctorId={doctorId}/> 
 
         {/* 🔹 NEW SECTION: SLOTS */}
         <div className={styles.section}>

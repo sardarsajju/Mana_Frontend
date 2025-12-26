@@ -56,3 +56,45 @@
   padding: 20px;
   color: #888;
 }
+
+
+
+.statusInProgress {
+  color: #fd7e14;
+  font-weight: 600;
+}
+
+/* ACTION BUTTONS */
+.startBtn {
+  background-color: #0d6efd;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.startBtn:hover {
+  background-color: #0b5ed7;
+}
+
+.completeBtn {
+  background-color: #198754;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.completeBtn:hover {
+  background-color: #157347;
+}
+
+.startBtn:disabled,
+.completeBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

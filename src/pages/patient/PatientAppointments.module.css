@@ -66,3 +66,26 @@
 .empty {
   color: #777;
 }
+
+
+
+.cancelBtn {
+  margin-top: 10px;
+  background: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.cancelBtn:hover {
+  background: #bb2d3b;
+}
+
+.cancelBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
