@@ -81,6 +81,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./DoctorAppointment.module.css";
+import { useNavigate } from "react-router-dom";
 
 const DoctorAppointments = ({ doctorId }) => {
   const [appointments, setAppointments] = useState([]);
@@ -94,34 +95,35 @@ const DoctorAppointments = ({ doctorId }) => {
       .then((res) => setAppointments(res.data))
       .catch((err) => console.error("Error fetching appointments:", err));
   };
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchAppointments();
   }, [doctorId]);
 
-const updateStatus = async (appointmentId, newStatus) => {
-  try {
-    setUpdatingId(appointmentId);
+  const updateStatus = async (appointmentId, newStatus) => {
+    try {
+      setUpdatingId(appointmentId);
 
-    await axios.patch(
-      `http://localhost:5005/api/appointment/status/${appointmentId}`,
-      { status: newStatus }
-    );
+      await axios.patch(
+        `http://localhost:5005/api/appointment/status/${appointmentId}`,
+        { status: newStatus }
+      );
 
-    // ✅ UPDATE LOCAL STATE INSTEAD OF REFETCH
-    setAppointments(prev =>
-      prev.map(appt =>
-        appt.appointment_id === appointmentId
-          ? { ...appt, status: newStatus }
-          : appt
-      )
-    );
-  } catch (err) {
-    alert(err.response?.data?.message || "Status update failed");
-  } finally {
-    setUpdatingId(null);
-  }
-};
+      // ✅ UPDATE LOCAL STATE INSTEAD OF REFETCH
+      setAppointments(prev =>
+        prev.map(appt =>
+          appt.appointment_id === appointmentId
+            ? { ...appt, status: newStatus }
+            : appt
+        )
+      );
+    } catch (err) {
+      alert(err.response?.data?.message || "Status update failed");
+    } finally {
+      setUpdatingId(null);
+    }
+  };
 
 
   return (
@@ -161,10 +163,10 @@ const updateStatus = async (appointmentId, newStatus) => {
                     appt.status === "BOOKED"
                       ? styles.statusBooked
                       : appt.status === "IN_PROGRESS"
-                      ? styles.statusInProgress
-                      : appt.status === "COMPLETED"
-                      ? styles.statusCompleted
-                      : styles.statusCancelled
+                        ? styles.statusInProgress
+                        : appt.status === "COMPLETED"
+                          ? styles.statusCompleted
+                          : styles.statusCancelled
                   }
                 >
                   {appt.status}
@@ -196,9 +198,27 @@ const updateStatus = async (appointmentId, newStatus) => {
                     </button>
                   )}
 
+                  {/* 📝 DOCTOR NOTES BUTTON */}
+                  <button
+                    className={styles.notesBtn}
+                    onClick={() =>
+                      navigate(`/notes/${appt.appointment_id}`)
+                    }
+                  >
+                    Notes
+                  </button>
+
+                  {/* 💬 CHAT */}
+                  <button
+                    onClick={() => navigate(`/chat/${appt.appointment_id}`)}
+                  >
+                    Chat
+                  </button>
+
                   {(appt.status === "COMPLETED" ||
                     appt.status === "CANCELLED") && <span>DONE</span>}
                 </td>
+
               </tr>
             ))
           )}

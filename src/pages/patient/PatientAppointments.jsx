@@ -86,6 +86,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import styles from "./PatientAppointments.module.css";
+import { useNavigate } from "react-router-dom";
 
 function PatientAppointments() {
   const user = useSelector((state) => state.user);
@@ -94,7 +95,7 @@ function PatientAppointments() {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cancellingId, setCancellingId] = useState(null);
-
+  const navigate = useNavigate();
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString("en-IN", {
       day: "2-digit",
@@ -138,12 +139,12 @@ function PatientAppointments() {
       );
 
       setAppointments(prev =>
-  prev.map(appt =>
-    appt.appointment_id === appointmentId
-      ? { ...appt, status: "CANCELLED" }
-      : appt
-  )
-);
+        prev.map(appt =>
+          appt.appointment_id === appointmentId
+            ? { ...appt, status: "CANCELLED" }
+            : appt
+        )
+      );
 
       fetchAppointments(); // refresh list
     } catch (err) {
@@ -169,9 +170,8 @@ function PatientAppointments() {
             <div className={styles.header}>
               <h3>Dr. {appt.doctor_name}</h3>
               <span
-                className={`${styles.status} ${
-                  styles[appt.status.toLowerCase()]
-                }`}
+                className={`${styles.status} ${styles[appt.status.toLowerCase()]
+                  }`}
               >
                 {appt.status}
               </span>
@@ -204,6 +204,23 @@ function PatientAppointments() {
                   : "Cancel Appointment"}
               </button>
             )}
+
+            <button
+              onClick={() => navigate(`/chat/${appt.appointment_id}`)}
+            >
+              Open Chat
+            </button>
+
+            {appt.status === "COMPLETED" && (
+              <button
+                onClick={() =>
+                  navigate(`/notes/${appt.appointment_id}`)
+                }
+              >
+                View Notes
+              </button>
+            )}
+
           </div>
         ))}
       </div>

@@ -1,0 +1,42 @@
+.container {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+h3 {
+  margin-bottom: 12px;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 10px;
+  display: block;
+}
+
+textarea {
+  width: 100%;
+  min-height: 70px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
+button {
+  background: #198754;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.saved {
+  margin-top: 8px;
+  color: #198754;
+  font-size: 13px;
+}

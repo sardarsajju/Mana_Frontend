@@ -12,6 +12,8 @@ import DoctorsList from "../pages/patient/DoctorList";
 import DoctorProfile from "../pages/patient/DoctorProfile";
 import ConfirmBooking from "../pages/patient/ConfirmBooking";
 import PatientAppointments from "../pages/patient/PatientAppointments";
+import AppointmentChat from "../pages/common/AppointmentChat";
+import DoctorNotes from "../pages/common/DoctorNotes";
 
 function AppRoutes() {
   return (
@@ -47,6 +49,14 @@ function AppRoutes() {
         element={<PatientAppointments />}
       />
 
+      <Route
+        path="/chat/:appointmentId"
+        element={<AppointmentChat />}
+      />
+      <Route
+        path="/notes/:appointmentId"
+        element={<DoctorNotes />}
+      />
 
     </Routes>
   );
