@@ -14,6 +14,7 @@ import ConfirmBooking from "../pages/patient/ConfirmBooking";
 import PatientAppointments from "../pages/patient/PatientAppointments";
 import AppointmentChat from "../pages/common/AppointmentChat";
 import DoctorNotes from "../pages/common/DoctorNotes";
+import AppointmentDocuments from "../pages/common/AppointmentDocuments";
 
 function AppRoutes() {
   return (
@@ -56,6 +57,11 @@ function AppRoutes() {
       <Route
         path="/notes/:appointmentId"
         element={<DoctorNotes />}
+      />
+
+      <Route
+        path="/documents/:appointmentId"
+        element={<AppointmentDocuments/>}
       />
 
     </Routes>

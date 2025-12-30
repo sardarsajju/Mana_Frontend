@@ -205,7 +205,7 @@ function PatientAppointments() {
               </button>
             )}
 
-            <button
+            {/* <button
               onClick={() => navigate(`/chat/${appt.appointment_id}`)}
             >
               Open Chat
@@ -219,7 +219,49 @@ function PatientAppointments() {
               >
                 View Notes
               </button>
+
             )}
+              <button onClick={() => navigate(`/documents/${appt.appointment_id}`)}>
+                Documents
+              </button> */}
+
+<div className={styles.actions}>
+  {appt.status === "BOOKED" && (
+    <button
+      className={`${styles.btn} ${styles.danger}`}
+      disabled={cancellingId === appt.appointment_id}
+      onClick={() => cancelAppointment(appt.appointment_id)}
+    >
+      ❌ Cancel
+    </button>
+  )}
+
+  <button
+    className={`${styles.btn} ${styles.info}`}
+    onClick={() => navigate(`/chat/${appt.appointment_id}`)}
+  >
+    💬 Chat
+  </button>
+
+  {appt.status === "COMPLETED" && (
+    <button
+      className={`${styles.btn} ${styles.success}`}
+      onClick={() => navigate(`/notes/${appt.appointment_id}`)}
+    >
+      📝 Notes
+    </button>
+  )}
+
+  <button
+    className={`${styles.btn} ${styles.secondary}`}
+    onClick={() => navigate(`/documents/${appt.appointment_id}`)}
+  >
+    📁 Docs
+  </button>
+</div>
+
+
+
 
           </div>
         ))}

@@ -173,7 +173,7 @@ const DoctorAppointments = ({ doctorId }) => {
                 </td>
 
                 {/* ACTION BUTTONS */}
-                <td>
+                {/* <td>
                   {appt.status === "BOOKED" && (
                     <button
                       className={styles.startBtn}
@@ -198,7 +198,6 @@ const DoctorAppointments = ({ doctorId }) => {
                     </button>
                   )}
 
-                  {/* 📝 DOCTOR NOTES BUTTON */}
                   <button
                     className={styles.notesBtn}
                     onClick={() =>
@@ -208,7 +207,6 @@ const DoctorAppointments = ({ doctorId }) => {
                     Notes
                   </button>
 
-                  {/* 💬 CHAT */}
                   <button
                     onClick={() => navigate(`/chat/${appt.appointment_id}`)}
                   >
@@ -217,7 +215,56 @@ const DoctorAppointments = ({ doctorId }) => {
 
                   {(appt.status === "COMPLETED" ||
                     appt.status === "CANCELLED") && <span>DONE</span>}
-                </td>
+                    
+                </td> */}
+
+
+<td className={styles.actions}>
+  {appt.status === "BOOKED" && (
+    <button
+      className={`${styles.btn} ${styles.primary}`}
+      onClick={() => updateStatus(appt.appointment_id, "IN_PROGRESS")}
+      disabled={updatingId === appt.appointment_id}
+    >
+      Start
+    </button>
+  )}
+
+  {appt.status === "IN_PROGRESS" && (
+    <button
+      className={`${styles.btn} ${styles.success}`}
+      onClick={() => updateStatus(appt.appointment_id, "COMPLETED")}
+      disabled={updatingId === appt.appointment_id}
+    >
+      Complete
+    </button>
+  )}
+
+  <button
+    className={`${styles.btn} ${styles.info}`}
+    onClick={() => navigate(`/chat/${appt.appointment_id}`)}
+  >
+    Chat
+  </button>
+
+  <button
+    className={`${styles.btn} ${styles.warning}`}
+    onClick={() => navigate(`/notes/${appt.appointment_id}`)}
+  >
+    Notes
+  </button>
+
+  <button
+    className={`${styles.btn} ${styles.secondary}`}
+    onClick={() => navigate(`/documents/${appt.appointment_id}`)}
+  >
+    Documents
+  </button>
+
+  {(appt.status === "COMPLETED" || appt.status === "CANCELLED") && (
+    <span className={styles.doneBadge}>Completed</span>
+  )}
+</td>
 
               </tr>
             ))
