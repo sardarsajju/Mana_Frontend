@@ -261,6 +261,14 @@ const DoctorAppointments = ({ doctorId }) => {
     Documents
   </button>
 
+  <button
+  className={`${styles.btn} ${styles.primary}`}
+  onClick={() => navigate(`/call/${appt.appointment_id}`)}
+>
+  📞 Call
+</button>
+
+
   {(appt.status === "COMPLETED" || appt.status === "CANCELLED") && (
     <span className={styles.doneBadge}>Completed</span>
   )}

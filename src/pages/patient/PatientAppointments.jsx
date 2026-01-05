@@ -225,41 +225,89 @@ function PatientAppointments() {
                 Documents
               </button> */}
 
-<div className={styles.actions}>
-  {appt.status === "BOOKED" && (
-    <button
-      className={`${styles.btn} ${styles.danger}`}
-      disabled={cancellingId === appt.appointment_id}
-      onClick={() => cancelAppointment(appt.appointment_id)}
-    >
-      ❌ Cancel
-    </button>
-  )}
+            {/* <div className={styles.actions}>
+              {appt.status === "BOOKED" && (
+                <button
+                  className={`${styles.btn} ${styles.danger}`}
+                  disabled={cancellingId === appt.appointment_id}
+                  onClick={() => cancelAppointment(appt.appointment_id)}
+                >
+                  ❌ Cancel
+                </button>
+              )}
 
+              <button
+                className={`${styles.btn} ${styles.info}`}
+                onClick={() => navigate(`/chat/${appt.appointment_id}`)}
+              >
+                💬 Chat
+              </button>
+
+              {appt.status === "COMPLETED" && (
+                <button
+                  className={`${styles.btn} ${styles.success}`}
+                  onClick={() => navigate(`/notes/${appt.appointment_id}`)}
+                >
+                  📝 Notes
+                </button>
+              )}
+
+              <button
+                className={`${styles.btn} ${styles.secondary}`}
+                onClick={() => navigate(`/documents/${appt.appointment_id}`)}
+              >
+                📁 Docs
+              </button>
+            </div> */}
+
+            <div className={styles.actions}>
+              {/* Chat */}
+              <button
+                className={`${styles.btn} ${styles.info}`}
+                onClick={() => navigate(`/chat/${appt.appointment_id}`)}
+              >
+                💬 Chat
+              </button>
+
+              {/* Documents */}
+              <button
+                className={`${styles.btn} ${styles.secondary}`}
+                onClick={() => navigate(`/documents/${appt.appointment_id}`)}
+              >
+                📁 Documents
+              </button>
+
+              {/* Notes (only after completed) */}
+              {appt.status === "COMPLETED" && (
+                <button
+                  className={`${styles.btn} ${styles.warning}`}
+                  onClick={() => navigate(`/notes/${appt.appointment_id}`)}
+                >
+                  📝 Notes
+                </button>
+              )}
+
+              {appt.status === "IN_PROGRESS" && (
   <button
     className={`${styles.btn} ${styles.info}`}
-    onClick={() => navigate(`/chat/${appt.appointment_id}`)}
+    onClick={() => navigate(`/call/${appt.appointment_id}`)}
   >
-    💬 Chat
+    🔊 Join Call
   </button>
+)}
 
-  {appt.status === "COMPLETED" && (
-    <button
-      className={`${styles.btn} ${styles.success}`}
-      onClick={() => navigate(`/notes/${appt.appointment_id}`)}
-    >
-      📝 Notes
-    </button>
-  )}
 
-  <button
-    className={`${styles.btn} ${styles.secondary}`}
-    onClick={() => navigate(`/documents/${appt.appointment_id}`)}
-  >
-    📁 Docs
-  </button>
-</div>
-
+              {/* Cancel (only booked) */}
+              {appt.status === "BOOKED" && (
+                <button
+                  className={`${styles.btn} ${styles.danger}`}
+                  disabled={cancellingId === appt.appointment_id}
+                  onClick={() => cancelAppointment(appt.appointment_id)}
+                >
+                  ❌ Cancel
+                </button>
+              )}
+            </div>
 
 
 

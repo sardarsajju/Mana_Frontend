@@ -15,6 +15,7 @@ import PatientAppointments from "../pages/patient/PatientAppointments";
 import AppointmentChat from "../pages/common/AppointmentChat";
 import DoctorNotes from "../pages/common/DoctorNotes";
 import AppointmentDocuments from "../pages/common/AppointmentDocuments";
+import AudioCall from "../pages/common/AudioCall";
 
 function AppRoutes() {
   return (
@@ -64,6 +65,10 @@ function AppRoutes() {
         element={<AppointmentDocuments/>}
       />
 
+      <Route
+        path="/call/:appointmentId"
+        element={<AudioCall/>}
+      />
     </Routes>
   );
 }
