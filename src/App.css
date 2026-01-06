@@ -1,0 +1,4 @@
+/* Make images in rich text clickable to open in new tab */
+.richTextViewer img {
+  cursor: pointer;
+}

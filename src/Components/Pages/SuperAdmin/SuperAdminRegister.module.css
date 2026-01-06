@@ -1,0 +1,534 @@
+/* SuperAdminRegister.module.css */
+
+/* Container and Layout */
+.container {
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Decoration */
+.backgroundDecor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.circle1, .circle2, .circle3 {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.05;
+}
+
+.circle1 {
+  width: 400px;
+  height: 400px;
+  background: #4f46e5;
+  top: -200px;
+  right: -100px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.circle2 {
+  width: 300px;
+  height: 300px;
+  background: #ff6b00;
+  bottom: -150px;
+  left: -50px;
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+.circle3 {
+  width: 250px;
+  height: 250px;
+  background: #4f46e5;
+  top: 50%;
+  left: 10%;
+  animation: float 30s ease-in-out infinite;
+}
+
+/* Content Wrapper */
+.contentWrapper {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(79, 70, 229, 0.1);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #f3f4f6;
+}
+
+/* Success Card */
+.successCard {
+  background: #ffffff;
+  padding: 60px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(79, 70, 229, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+.successIcon {
+  margin-bottom: 24px;
+  color: #10b981;
+}
+
+.successCard h2 {
+  font-size: 32px;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.successCard p {
+  color: #6b7280;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.redirectText {
+  color: #4f46e5;
+  font-weight: 500;
+  animation: pulse 2s infinite;
+}
+
+/* Branding Side */
+.brandingSide {
+  flex: 1;
+  background: #4f46e5;
+  padding: 60px 50px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.brandingContent {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.logoContainer svg {
+  color: #ff6b00;
+}
+
+.logoContainer h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.brandingSide h2 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.brandingSide p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 48px;
+}
+
+/* Features */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.featureItem:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+.featureItem svg {
+  color: #ff6b00;
+  flex-shrink: 0;
+}
+
+.featureItem span {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Form Side */
+.formSide {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 50px;
+  background: #ffffff;
+}
+
+.registerCard {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Back Link */
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 32px;
+  transition: all 0.3s ease;
+}
+
+.backLink:hover {
+  color: #4f46e5;
+  transform: translateX(-4px);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.iconWrapper {
+  width: 64px;
+  height: 64px;
+  background: #4f46e5;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 16px rgba(79, 70, 229, 0.2);
+}
+
+.iconWrapper svg {
+  color: #ffffff;
+}
+
+.header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.header p {
+  color: #6b7280;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+/* Admin Badge */
+.adminBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #ff6b00;
+  color: #ffffff;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(255, 107, 0, 0.2);
+}
+
+.adminBadge svg {
+  color: #ffffff;
+}
+
+/* Error Alert */
+.errorAlert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  animation: slideIn 0.3s ease;
+}
+
+.errorAlert svg {
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+.errorAlert span {
+  color: #991b1b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 16px;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px 12px 48px;
+  font-size: 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+/* Password Toggle */
+.togglePassword {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.togglePassword:hover {
+  color: #4f46e5;
+}
+
+/* Role Display */
+.roleDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #f3f4f6;
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+}
+
+.roleDisplay svg {
+  color: #4f46e5;
+}
+
+.roleDisplay span {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.roleDisplay strong {
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+/* Submit Button */
+.submitBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 24px;
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #4f46e5;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.submitBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+  background: #4338ca;
+}
+
+.submitBtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background: #9ca3af;
+  box-shadow: none;
+}
+
+/* Spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Footer */
+.footer {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.loginText {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.link {
+  color: #ff6b00;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  color: #ff8c00;
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-30px) rotate(120deg);
+  }
+  66% {
+    transform: translateY(20px) rotate(240deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .brandingSide {
+    display: none;
+  }
+  
+  .contentWrapper {
+    max-width: 500px;
+  }
+  
+  .formSide {
+    padding: 40px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .formSide {
+    padding: 30px 20px;
+  }
+  
+  .header h2 {
+    font-size: 24px;
+  }
+  
+  .successCard {
+    padding: 40px 20px;
+  }
+}

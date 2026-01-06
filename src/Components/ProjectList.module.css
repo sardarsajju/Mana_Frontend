@@ -1,0 +1,11 @@
+.container {
+  padding: 30px;
+}
+
+.project {
+  padding: 15px;
+  background: #eef2ff;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}

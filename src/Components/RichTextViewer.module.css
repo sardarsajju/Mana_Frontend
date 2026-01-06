@@ -1,0 +1,126 @@
+/* Components/RichTextViewer.module.css */
+
+.richTextViewer {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #334155;
+  word-break: break-word;
+}
+
+.richTextViewer p {
+  margin: 0 0 12px 0;
+}
+
+.richTextViewer p:last-child {
+  margin-bottom: 0;
+}
+
+/* Images */
+.richTextViewer img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 12px 0;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: block;
+  border: 1px solid #e2e8f0;
+}
+
+.richTextViewer img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* File Attachments */
+.richTextViewer :global([data-file-attachment]) {
+  margin: 12px 0;
+}
+
+.richTextViewer :global(.rich-file-link) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #334155;
+  transition: all 0.2s;
+}
+
+.richTextViewer :global(.rich-file-link:hover) {
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  border-color: #6366f1;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+.richTextViewer :global(.rich-file-icon) {
+  font-size: 24px;
+}
+
+.richTextViewer :global(.rich-file-info) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.richTextViewer :global(.rich-file-name) {
+  font-weight: 600;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.richTextViewer :global(.rich-file-size) {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.richTextViewer :global(.rich-file-download) {
+  font-size: 18px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.richTextViewer :global(.rich-file-link:hover .rich-file-download) {
+  opacity: 1;
+}
+
+/* File attachment link (fallback styling) */
+.richTextViewer :global(.file-attachment-link) {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #4f46e5;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.richTextViewer :global(.file-attachment-link:hover) {
+  background: #e0e7ff;
+}
+
+/* Text styling */
+.richTextViewer strong {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.richTextViewer em {
+  font-style: italic;
+}
+
+/* Empty state */
+.empty {
+  color: #94a3b8;
+  font-style: italic;
+}

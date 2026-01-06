@@ -1,0 +1,784 @@
+/* Enhanced RaiseBug.module.css - Light Theme with Active States */
+
+/* Container */
+.container {
+  min-height: 100vh;
+  padding: 24px;
+  background-color: #f5f7fa;
+  display: flex;
+  justify-content: center;
+}
+
+/* Loading Wrapper */
+.loadingWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #6b7280;
+  padding: 48px;
+}
+
+/* Card */
+.card {
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  padding: 32px 32px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #fafbfc;
+  position: relative;
+}
+
+.backBtn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: #6b7280;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.backBtn:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.headerContent {
+  text-align: center;
+}
+
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background-color: #ef4444;
+  color: white;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.header h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Form */
+.form {
+  padding: 32px;
+}
+
+/* Input Groups */
+.inputGroup {
+  margin-bottom: 24px;
+}
+
+.inputGroup label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s;
+  background-color: white;
+  color: #111827;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.input:hover {
+  border-color: #9ca3af;
+}
+
+.input:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Editor Section */
+.editorSection {
+  margin-bottom: 24px;
+}
+
+.editorSection > label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background-color: #fafbfc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px 8px 0 0;
+  border-bottom: none;
+  flex-wrap: wrap;
+}
+
+.toolbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Toolbar Button Base Styles */
+.toolbarBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toolbarBtn:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+  color: #374151;
+}
+
+/* Active State for Toolbar Buttons */
+.toolbarBtn.active {
+  background-color: #ef4444;
+  border-color: #ef4444;
+  color: white;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+.toolbarBtn.active:hover {
+  background-color: #dc2626;
+  border-color: #dc2626;
+  color: white;
+}
+
+/* Separator */
+.separator {
+  width: 1px;
+  height: 24px;
+  background-color: #e5e7eb;
+  margin: 0 4px;
+}
+
+/* Color Picker */
+.colorPicker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.colorPicker:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.colorPicker input[type="color"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.colorPicker svg {
+  color: #6b7280;
+  pointer-events: none;
+  transition: all 0.2s;
+}
+
+/* Color Picker Active State */
+.colorPicker.active {
+  background-color: #fef2f2;
+  border-color: #ef4444;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+.colorPicker.active svg {
+  color: #ef4444;
+}
+
+/* Color Indicator (shows current color) */
+.colorIndicator {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* Color Reset Button */
+.colorResetBtn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  background-color: #ef4444;
+  border: 1px solid white;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 10;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
+}
+
+.colorResetBtn:hover {
+  background-color: #dc2626;
+  transform: scale(1.1);
+}
+
+/* Upload Buttons */
+.uploadBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #6b7280;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.uploadBtn:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+  color: #374151;
+}
+
+/* Uploading Indicator */
+.uploadingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 6px;
+  color: #92400e;
+  font-size: 13px;
+}
+
+/* Editor Container - Scrollable */
+.editorContainer {
+  position: relative;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0 0 8px 8px;
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.editorContainer:focus-within {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Custom Scrollbar */
+.editorContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.editorContainer::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 0 0 8px 0;
+}
+
+.editorContainer::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.editorContainer::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.editor {
+  min-height: 200px;
+}
+
+/* Placeholder */
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  pointer-events: none;
+  color: #9ca3af;
+}
+
+.placeholder p {
+  margin: 0 0 4px;
+}
+
+.placeholderHint {
+  font-size: 13px;
+  color: #d1d5db;
+}
+
+/* Editor Footer */
+.editorFooter {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 12px;
+  color: #9ca3af;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* TipTap Editor Styles */
+.editor :global(.ProseMirror) {
+  min-height: 180px;
+  padding: 16px;
+  outline: none;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #111827;
+}
+
+.editor :global(.ProseMirror) p {
+  margin: 0 0 12px 0;
+}
+
+.editor :global(.ProseMirror) p:last-child {
+  margin-bottom: 0;
+}
+
+.editor :global(.ProseMirror) strong {
+  font-weight: 600;
+  color: #111827;
+}
+
+.editor :global(.ProseMirror) em {
+  font-style: italic;
+}
+
+/* Image Wrapper - Inside Editor */
+.imageWrapper {
+  display: inline-block;
+  margin: 8px;
+  vertical-align: top;
+}
+
+.imageContainer {
+  position: relative;
+  display: inline-block;
+  border-radius: 8px;
+  overflow: visible;
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+  transition: all 0.2s ease;
+  padding: 4px;
+}
+
+.imageContainer:hover {
+  border-color: #ef4444;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.15);
+}
+
+.imageContainer.selected {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.editorImage {
+  display: block;
+  max-width: 150px;
+  max-height: 120px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.deleteImageBtn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  background: #ef4444;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 10;
+  padding: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.imageContainer:hover .deleteImageBtn {
+  opacity: 1;
+}
+
+.deleteImageBtn:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+/* File Wrapper - Inside Editor */
+.fileWrapper {
+  display: block;
+  margin: 8px 0;
+}
+
+.fileContainer {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 40px 10px 12px;
+  max-width: 320px;
+  transition: all 0.2s ease;
+}
+
+.fileContainer:hover {
+  background: #f3f4f6;
+  border-color: #ef4444;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
+}
+
+.fileContainer.selected {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.fileLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #374151;
+  text-decoration: none;
+}
+
+.fileLink svg {
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+.fileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.fileName {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.fileSize {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.deleteFileBtn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 50%;
+  color: #ef4444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.fileContainer:hover .deleteFileBtn {
+  opacity: 1;
+}
+
+.deleteFileBtn:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Dropdown */
+.dropdown {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  font-size: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s;
+  background-color: white;
+  color: #111827;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  box-sizing: border-box;
+}
+
+.dropdown:hover {
+  border-color: #9ca3af;
+}
+
+.dropdown:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Submit Button */
+.submitBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: #ef4444;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.spin {
+  animation: spin 0.6s linear infinite;
+}
+
+/* Animations */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .card {
+    border-radius: 8px;
+  }
+
+  .header {
+    padding: 24px 24px 20px;
+  }
+
+  .backBtn {
+    position: static;
+    margin-bottom: 20px;
+  }
+
+  .form {
+    padding: 24px;
+  }
+
+  .toolbar {
+    padding: 8px;
+  }
+
+  .toolbarLeft {
+    width: 100%;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .editorContainer {
+    min-height: 180px;
+    max-height: 350px;
+  }
+
+  .editorImage {
+    max-width: 120px;
+    max-height: 100px;
+  }
+
+  .editorFooter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h2 {
+    font-size: 20px;
+  }
+
+  .form {
+    padding: 20px;
+  }
+
+  .input,
+  .dropdown {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .dropdown {
+    padding-right: 36px;
+  }
+
+  .submitBtn {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+
+  .editor :global(.ProseMirror) {
+    font-size: 14px;
+    min-height: 160px;
+    padding: 12px;
+  }
+
+  .uploadBtn span {
+    display: none;
+  }
+
+  .uploadBtn {
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+  }
+
+  .imageWrapper {
+    max-width: calc(100% - 16px);
+  }
+
+  .editorImage {
+    max-width: 100px;
+    max-height: 80px;
+  }
+
+  .fileName {
+    max-width: 140px;
+  }
+
+  .toolbarBtn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .colorPicker {
+    width: 32px;
+    height: 32px;
+  }
+}
