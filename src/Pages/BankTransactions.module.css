@@ -1,0 +1,71 @@
+.container {
+    padding: 30px;
+    background: #f4f7fb;
+    min-height: 100vh;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+}
+
+.loading,
+.empty {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+}
+
+.tableWrapper {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background: #1e3c72;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.table tr:hover {
+    background-color: #f1f5ff;
+}
+
+.amount {
+    font-weight: bold;
+}
+
+.credit {
+    background: #e6f9f0;
+    color: #0a8754;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.debit {
+    background: #fdecea;
+    color: #c0392b;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+

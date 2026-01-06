@@ -75,7 +75,7 @@ export default function ProfilePage() {
     }
   };
   const hadnlelogout = () => {
-    navigate('/userlogin')
+    navigate('/')
   }
   return (
     <div className={styles.container}>

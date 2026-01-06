@@ -13,6 +13,28 @@ function Banklogin() {
     const inputsRef = useRef([]);
     const STATIC_OTP = "8897";
 
+    // const sendOtp = async () => {
+    //     if (mobileNumber.length !== 10) {
+    //         alert("Mobile number must be exactly 10 digits");
+    //         return;
+    //     }
+
+    //     try {
+    //         const res = await axios.post(`${API_URL}/bank/loginbank`, {
+    //             mobileNumber,
+    //         });
+
+    //         if (res.data.success) {
+    //             setIsOtpSent(true);
+    //             alert("OTP sent to your mobile");
+    //         }
+    //     } catch {
+    //         alert("Invalid mobile number");
+    //     }
+    // };
+
+
+
     const sendOtp = async () => {
         if (mobileNumber.length !== 10) {
             alert("Mobile number must be exactly 10 digits");
@@ -25,6 +47,11 @@ function Banklogin() {
             });
 
             if (res.data.success) {
+                const bankData = res.data.data[0];
+
+                localStorage.setItem("bankId", bankData.Bank_id);
+                localStorage.setItem("bankName", bankData.Bank_Name);
+
                 setIsOtpSent(true);
                 alert("OTP sent to your mobile");
             }
@@ -65,7 +92,7 @@ function Banklogin() {
                     type="text"
                     placeholder="Enter Mobile Number"
                     value={mobileNumber}
-                    maxLength={10}          
+                    maxLength={10}
                     onChange={(e) => {
                         const value = e.target.value.replace(/\D/g, "");
                         setMobileNumber(value);
