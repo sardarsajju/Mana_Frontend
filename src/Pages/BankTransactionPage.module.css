@@ -1,5 +1,6 @@
 .pageWrapper {
   min-height: 100vh;
+  background-color: white;
   padding: 20px;
   font-family: "Segoe UI", sans-serif;
 }

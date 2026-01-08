@@ -1,0 +1,121 @@
+/* Top Navigation Bar */
+.topNav {
+  width: 100%;
+  height: 64px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Inner container */
+.navContent {
+  max-width: 1400px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand section */
+.brandSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brandIcon {
+  color: #004c8c;
+}
+
+.brandName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Right side actions */
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Icon buttons */
+.iconButton {
+  position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  color: #4b5563;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.iconButton:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+/* Notification dot */
+.notificationDot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+}
+
+/* User menu */
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.userMenu:hover {
+  background-color: #f3f4f6;
+}
+
+/* User avatar */
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
+}
+
+/* User name */
+.userName {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .userName {
+    display: none;
+  }
+
+  .navContent {
+    padding: 0 16px;
+  }
+}

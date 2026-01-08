@@ -60,6 +60,8 @@ import Deposit from "./Pages/Deposit";
 import Transactions from "./Pages/Transcations";
 import ProfilePage from "./Pages/Profile";
 import Usercrads from "./Pages/Cards";
+import Kycdetails from "./Pages/Kycdetails";
+// import BankAdmin from "./Pages/AdminHome";
 
 function App() {
   return (
@@ -70,10 +72,13 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/userlogin" element={<Login />} />
         <Route path="/signup" element={<Singuppage />} />
-        <Route path="/bank" element={<BankRegister/>} />
-        <Route path="/banklogin" element={<Banklogin/>} />
+        <Route path="/bank" element={<BankRegister />} />
+        {/* <Route path="/bankdashboard"element={<BankAdmin />} /> */}
+        <Route path="/banklogin" element={<Banklogin />} />
         <Route path="/bankhome" element={<Bankhome />} />
         <Route path="/banktransactions" element={<BankingTranscations />} />
+        <Route path="/kyc" element={<Kycdetails />} />
+
       </Route>
 
       {/* Routes WITH Navbar */}
@@ -82,7 +87,7 @@ function App() {
         <Route path="/deposit" element={<Deposit />} />
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path='/cards'element={<Usercrads/>}/>
+        <Route path='/cards' element={<Usercrads />} />
       </Route>
 
     </Routes>

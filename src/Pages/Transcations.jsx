@@ -44,6 +44,7 @@ export default function Transactions() {
         `${API_URL}/transcations/gettranscations/${user_id}`
       );
       setTransactions(res.data.transactions);
+      console.log(res.data.transactions);
     } catch (error) {
       console.log("Error fetching:", error);
     }
@@ -113,6 +114,7 @@ const handledownlaod = async () => {
 
   return (
     <div className={styles.pageWrapper}>
+      
       <div className={styles.container}>
         <button className={styles.addButton} onClick={() => setshowpopup(true)}>
           + Add Transaction
@@ -208,7 +210,7 @@ const handledownlaod = async () => {
           Manage your account & view history
         </p>
 
-        <div className={styles.cardGrid}>
+        {/* <div className={styles.cardGrid}>
           <div className={`${styles.card} ${styles.blueCard}`}>
             <p>Total Balance</p>
             <h2>
@@ -216,7 +218,7 @@ const handledownlaod = async () => {
               {balance}
             </h2>
           </div>
-        </div>
+        </div> */}
 
         {/* Tabs */}
         <div className={styles.tabContainer}>

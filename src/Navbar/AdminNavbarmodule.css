@@ -1,0 +1,35 @@
+.admin-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1e293b;
+    padding: 12px 24px;
+    color: white;
+}
+
+.admin-logo {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.admin-nav-links {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+}
+
+.admin-nav-links li a {
+    text-decoration: none;
+    color: #cbd5f5;
+    font-weight: 500;
+}
+
+.admin-nav-links li a:hover {
+    color: white;
+}
+
+.active-link {
+    color: #38bdf8 !important;
+    border-bottom: 2px solid #38bdf8;
+    padding-bottom: 4px;
+}
