@@ -390,7 +390,70 @@
   z-index: 998;
   animation: fadeIn 0.3s ease-out;
 }
+/* ===== MINIMAL NAVBAR STYLES (For Select Organization Page) ===== */
+.minimalNavbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: #ffffff;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 100;
+}
 
+.minimalNavbar .logo {
+  cursor: default;
+}
+
+.minimalLogoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 10px;
+  color: #e60707;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.minimalLogoutBtn:hover {
+  border-color: rgba(0, 0, 0, 0.5);
+  color: #000000;
+  transform: translateY(-2px);
+}
+
+/* Responsive for Minimal Navbar */
+@media (max-width: 768px) {
+  .minimalNavbar {
+    padding: 0 1rem;
+  }
+
+  .minimalNavbar .logo span {
+    display: none;
+  }
+
+  .minimalNavbar .roleBadge span {
+    display: none;
+  }
+
+  .minimalLogoutBtn span {
+    display: none;
+  }
+
+  .minimalLogoutBtn {
+    padding: 0.625rem;
+    border-radius: 50%;
+  }
+}
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }

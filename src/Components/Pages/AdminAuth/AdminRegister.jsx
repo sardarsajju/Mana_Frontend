@@ -10,7 +10,7 @@ function AdminRegister() {
     name: "",
     email: "",
     password: "",
-    role: "admin" // Fixed to admin only
+    role: "admin" 
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");

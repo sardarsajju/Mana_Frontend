@@ -1,4 +1,3 @@
-// BugList.jsx - Developer's view with BugOverview navigation
 import React, { useEffect, useState, useContext } from "react";
 import API from "../api/axiosConfig";
 import styles from "../Components/BugList.module.css";
@@ -16,12 +15,15 @@ import {
   Bell,
   Code2,
   Image as ImageIcon,
-  FolderOpen
+  FolderOpen,
+  Search,
+  X
 } from "lucide-react";
 
 function BugList() {
   const [bugs, setBugs] = useState([]);
   const [filter, setFilter] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -91,6 +93,20 @@ function BugList() {
     }
   };
 
+  // Filter bugs based on search term
+  const filteredBugs = bugs.filter((bug) => {
+    if (!searchTerm) return true;
+    
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      bug.title.toLowerCase().includes(searchLower) ||
+      bug.description.toLowerCase().includes(searchLower) ||
+      bug.tester_name.toLowerCase().includes(searchLower) ||
+      bug.status.toLowerCase().includes(searchLower) ||
+      `bug #${bug.bug_id}`.includes(searchLower)
+    );
+  });
+
   // ✅ Show loading while user is being fetched
   if (!user || isLoading) {
     return (
@@ -116,7 +132,6 @@ function BugList() {
         </p>
       </div>
 
-      {/* Rest of your JSX stays the same... */}
       {/* Controls */}
       <div className={styles.controls}>
         <div className={styles.filterWrapper}>
@@ -125,6 +140,26 @@ function BugList() {
             <option value="all">All Bugs</option>
             <option value="assigned">Assigned to Me</option>
           </select>
+        </div>
+        
+        {/* Search Input */}
+        <div className={styles.searchWrapper}>
+          <Search size={20} />
+          <input
+            type="text"
+            placeholder="Search bugs..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.searchInput}
+          />
+          {searchTerm && (
+            <button
+              className={styles.clearSearch}
+              onClick={() => setSearchTerm("")}
+            >
+              <X size={16} />
+            </button>
+          )}
         </div>
 
         <div className={styles.stats}>
@@ -154,9 +189,21 @@ function BugList() {
           <h3>No Bugs Found</h3>
           <p>No bugs have been assigned to your projects yet.</p>
         </div>
+      ) : filteredBugs.length === 0 ? (
+        <div className={styles.emptyState}>
+          <Search size={48} />
+          <h3>No Matching Bugs</h3>
+          <p>No bugs match your search criteria. Try a different search term.</p>
+          <button 
+            className={styles.clearSearchBtn} 
+            onClick={() => setSearchTerm("")}
+          >
+            Clear Search
+          </button>
+        </div>
       ) : (
         <div className={styles.bugGrid}>
-          {bugs.map((bug) => (
+          {filteredBugs.map((bug) => (
             <div
               key={bug.bug_id}
               className={styles.bugCard}

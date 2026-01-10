@@ -13,7 +13,10 @@ import {
   AlertCircle, 
   ArrowLeft,
   CheckCircle,
-  UserPlus
+  UserPlus,
+  ChevronDown,
+  Crown,
+  UserCog
 } from "lucide-react";
 
 function SuperAdminRegister() {
@@ -22,7 +25,7 @@ function SuperAdminRegister() {
     email: "",
     password: "",
     confirmPassword: "",
-    role: "admin" // Always admin for super admin registration
+    role: "admin" // Default to admin
   });
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -60,14 +63,18 @@ function SuperAdminRegister() {
         name: form.name,
         email: form.email,
         password: form.password,
-        role: "admin" // Force admin role
+        role: form.role // Send selected role
       });
 
       setSuccess(true);
       
-      // Redirect to login after 2 seconds
+      // Redirect based on role after 2 seconds
       setTimeout(() => {
-        navigate("/super-admin/login");
+        if (form.role === "super_admin") {
+          navigate("/super-admin/login");
+        } else {
+          navigate("/user/login");
+        }
       }, 2000);
 
     } catch (error) {
@@ -78,6 +85,22 @@ function SuperAdminRegister() {
     }
   };
 
+  // Get role display info
+  const getRoleInfo = () => {
+    if (form.role === "super_admin") {
+      return {
+        icon: <Crown size={18} />,
+        label: "Super Administrator",
+        description: "Full system access with organization management"
+      };
+    }
+    return {
+      icon: <UserCog size={18} />,
+      label: "Administrator",
+      description: "Manage projects and team members within organization"
+    };
+  };
+
   if (success) {
     return (
       <div className={styles.container}>
@@ -86,7 +109,9 @@ function SuperAdminRegister() {
             <CheckCircle size={64} />
           </div>
           <h2>Registration Successful!</h2>
-          <p>Your admin account has been created successfully.</p>
+          <p>
+            Your {form.role === "super_admin" ? "Super Admin" : "Admin"} account has been created successfully.
+          </p>
           <p className={styles.redirectText}>Redirecting to login...</p>
         </div>
       </div>
@@ -131,7 +156,32 @@ function SuperAdminRegister() {
               </div>
               <div className={styles.featureItem}>
                 <CheckCircle size={20} />
-                <span>Access super admin dashboard</span>
+                <span>Access admin dashboard</span>
+              </div>
+            </div>
+
+            {/* Role Comparison */}
+            <div className={styles.roleComparison}>
+              <h3>Role Comparison</h3>
+              <div className={styles.roleCompareGrid}>
+                <div className={styles.roleCompareItem}>
+                  <UserCog size={24} />
+                  <h4>Admin</h4>
+                  <ul>
+                    <li>Manage single organization</li>
+                    <li>Create projects</li>
+                    <li>Invite team members</li>
+                  </ul>
+                </div>
+                <div className={styles.roleCompareItem}>
+                  <Crown size={24} />
+                  <h4>Super Admin</h4>
+                  <ul>
+                    <li>Manage all organizations</li>
+                    <li>System-wide access</li>
+                    <li>Platform oversight</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -151,10 +201,6 @@ function SuperAdminRegister() {
               </div>
               <h2>Admin Registration</h2>
               <p>Create your administrator account</p>
-              <div className={styles.adminBadge}>
-                <Shield size={14} />
-                <span>Admin Role Only</span>
-              </div>
             </div>
 
             {error && (
@@ -255,10 +301,37 @@ function SuperAdminRegister() {
                 </div>
               </div>
 
-              {/* Role is fixed to Admin - Display only */}
-              <div className={styles.roleDisplay}>
-                <Shield size={18} />
-                <span>Role: <strong>Administrator</strong></span>
+              {/* Role Selection Dropdown */}
+              <div className={styles.inputGroup}>
+                <label htmlFor="role">Select Admin Type</label>
+                <div className={styles.selectWrapper}>
+                  <span className={styles.inputIcon}>
+                    <Shield size={20} />
+                  </span>
+                  <select
+                    id="role"
+                    name="role"
+                    value={form.role}
+                    onChange={handleChange}
+                    className={styles.select}
+                    required
+                  >
+                    <option value="admin">Admin</option>
+                    <option value="super_admin">Super Admin</option>
+                  </select>
+                  <span className={styles.selectArrow}>
+                    <ChevronDown size={20} />
+                  </span>
+                </div>
+              </div>
+
+              {/* Selected Role Display */}
+              <div className={`${styles.roleDisplay} ${form.role === "super_admin" ? styles.superAdminRole : styles.adminRole}`}>
+                {getRoleInfo().icon}
+                <div className={styles.roleInfo}>
+                  <span className={styles.roleLabel}>{getRoleInfo().label}</span>
+                  <span className={styles.roleDescription}>{getRoleInfo().description}</span>
+                </div>
               </div>
 
               <button type="submit" disabled={isLoading} className={styles.submitBtn}>
@@ -270,7 +343,7 @@ function SuperAdminRegister() {
                 ) : (
                   <>
                     <UserPlus size={20} />
-                    Create Admin Account
+                    Create {form.role === "super_admin" ? "Super Admin" : "Admin"} Account
                   </>
                 )}
               </button>
@@ -278,8 +351,11 @@ function SuperAdminRegister() {
 
             <div className={styles.footer}>
               <p className={styles.loginText}>
-                Already have an admin account?{" "}
-                <Link to="/super-admin/login" className={styles.link}>
+                Already have an account?{" "}
+                <Link 
+                  to={form.role === "super_admin" ? "/super-admin/login" : "/user/login"} 
+                  className={styles.link}
+                >
                   Sign in here
                 </Link>
               </p>

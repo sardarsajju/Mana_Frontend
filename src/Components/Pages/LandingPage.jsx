@@ -1,5 +1,5 @@
 // src/pages/LandingPage/LandingPage.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../Pages/LandingPage.module.css";
 import { 
@@ -15,33 +15,14 @@ import {
   BarChart3,
   Lock
 } from "lucide-react";
+import AuthContext from "../../context/AuthContext";
 
 function LandingPage() {
+  const {user} = useContext(AuthContext);
   const navigate = useNavigate();
   const [activeFeature, setActiveFeature] = useState(0);
 
-  const features = [
-    {
-      icon: <Bug size={32} />,
-      title: "Bug Tracking",
-      description: "Report, track, and resolve bugs efficiently with our intuitive interface."
-    },
-    {
-      icon: <FolderKanban size={32} />,
-      title: "Project Management",
-      description: "Organize bugs by projects and maintain clear visibility across teams."
-    },
-    {
-      icon: <MessageSquare size={32} />,
-      title: "Real-time Chat",
-      description: "Collaborate instantly with developers and testers through built-in messaging."
-    },
-    {
-      icon: <BarChart3 size={32} />,
-      title: "Analytics Dashboard",
-      description: "Get insights into bug trends, resolution times, and team performance."
-    }
-  ];
+
 
   const stats = [
     { value: "10K+", label: "Bugs Resolved" },
@@ -50,12 +31,21 @@ function LandingPage() {
     { value: "99.9%", label: "Uptime" }
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveFeature((prev) => (prev + 1) % features.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  useEffect(()=>{
+    if (user){
+      const redirect = {
+        "super-admin": "/super-admin",
+        "admin": "/admin/dashboard",
+        "developer": "/bugs",
+        "tester": "/tester/dashboard",
+        
+      };
+
+      navigate(redirect[user.role]);
+    }
+  },[user]);
+  
+
 
   return (
     <div className={styles.container}>
@@ -74,11 +64,9 @@ function LandingPage() {
         </div>
 
         <div className={styles.navLinks}>
-          <a href="#features">Features</a>
           <a href="#about">About</a>
           <a href="#portals">Get Started</a>
 
-          {/* 🔐 Super Admin Access */}
           <span
             className={styles.superAdminLink}
             onClick={() => navigate("/super-admin/login")}
@@ -136,31 +124,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className={styles.features}>
-        <div className={styles.sectionHeader}>
-          <h2>Features</h2>
-          <p>Everything you need to manage bugs effectively</p>
-        </div>
-
-        <div className={styles.featureGrid}>
-          {features.map((feature, index) => (
-            <div 
-              key={index} 
-              className={`${styles.featureCard} ${
-                activeFeature === index ? styles.active : ""
-              }`}
-              onMouseEnter={() => setActiveFeature(index)}
-            >
-              <div className={styles.featureIcon}>
-                {feature.icon}
-              </div>
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Portal Selection Section - LOGIN ONLY */}
       <section id="portals" className={styles.portals}>

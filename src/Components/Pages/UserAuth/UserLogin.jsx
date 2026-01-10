@@ -35,6 +35,8 @@ function UserLogin() {
 
       // Navigate based on the role returned from backend
       if (res.data.role === "admin") {
+        localStorage.removeItem("org_id");
+        localStorage.removeItem("org_name");
         navigate("/admin/select-organization");
       } else if (res.data.role === "tester") {
         navigate("/tester/dashboard");

@@ -35,6 +35,11 @@ import BugOverview from "./Components/BugOverview";
 import BugChat from "./Components/BugChat";
 import ManageAccess from "./Components/ManageAccess";
 import TeamPortal from "./Components/TeamPortal";
+import AdminProfile from "./Components/AdminProfile";
+import AdminUsers from "./Components/AdminUsers";
+import AdminProjects from "./Components/AdminProjects";
+import AdminProjectBugs from "./Components/AdminProjectBugs";
+import AdminBugDetail from "./Components/AdminBugDetails";
 
 
 function App() {
@@ -69,6 +74,12 @@ function App() {
           {/* 🏢 Admin */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/manage-access" element={<ManageAccess />} />
+
+          <Route path="/admin/profile" element={<AdminProfile />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/projects" element={<AdminProjects />} />
+          <Route path="/admin/projects/:orgId/:projectId/bugs" element={<AdminProjectBugs />} />
+          <Route path="/admin/bugs/:bugId" element={<AdminBugDetail />} />
           <Route
             path="/admin/create-project"
             element={<AdminCreateProject />}

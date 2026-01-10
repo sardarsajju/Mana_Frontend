@@ -1,10 +1,9 @@
-// Updated TesterBugList.jsx
+// TesterBugList.jsx - Updated with navigation
 import React, { useEffect, useState, useContext } from "react";
 import API from "../api/axiosConfig";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import styles from "../Components/TesterBugList.module.css";
-import RichTextViewer from "../Components/RichTextViewer";
+import styles from "./TesterBugList.module.css";
 import { 
   Bug, 
   MessageCircle, 
@@ -12,9 +11,11 @@ import {
   Clock,
   CheckCircle,
   XCircle,
-  Image as ImageIcon,
   Bell,
-  FolderOpen
+  FolderOpen,
+  Eye,
+  Calendar,
+  User
 } from "lucide-react";
 
 function TesterBugList() {
@@ -24,18 +25,16 @@ function TesterBugList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // ✅ Only load if user exists
     if (user) {
       loadBugs();
     }
-  }, [user]);  // ✅ Add user as dependency
+  }, [user]);
 
   const loadBugs = async () => {
-    if (!user) return;  // ✅ Guard clause
+    if (!user) return;
     
     setIsLoading(true);
     try {
-      // ✅ FIXED: Use user.user_id instead of user.id
       const res = await API.get(`/bugs/tester?tester=${user.user_id}`);
       setBugs(res.data);
     } catch (error) {
@@ -48,15 +47,15 @@ function TesterBugList() {
   const getStatusIcon = (status) => {
     switch(status?.toLowerCase()) {
       case 'open':
-        return <AlertCircle size={16} />;
-      case 'in-progress':  // ✅ Fixed: use hyphen to match DB enum
-        return <Clock size={16} />;
+        return <AlertCircle size={14} />;
+      case 'in-progress':
+        return <Clock size={14} />;
       case 'resolved':
-        return <CheckCircle size={16} />;
+        return <CheckCircle size={14} />;
       case 'closed':
-        return <XCircle size={16} />;
+        return <XCircle size={14} />;
       default:
-        return <AlertCircle size={16} />;
+        return <AlertCircle size={14} />;
     }
   };
 
@@ -64,7 +63,7 @@ function TesterBugList() {
     switch(status?.toLowerCase()) {
       case 'open':
         return styles.statusOpen;
-      case 'in-progress':  // ✅ Fixed: use hyphen to match DB enum
+      case 'in-progress':
         return styles.statusProgress;
       case 'resolved':
         return styles.statusResolved;
@@ -75,7 +74,6 @@ function TesterBugList() {
     }
   };
 
-  // ✅ Show loading while user is being fetched
   if (!user || isLoading) {
     return (
       <div className={styles.container}>
@@ -91,7 +89,7 @@ function TesterBugList() {
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.headerIcon}>
-          <Bug size={32} />
+          <Bug size={28} />
         </div>
         <h1>Your Reported Bugs</h1>
         <p className={styles.subtitle}>
@@ -127,78 +125,110 @@ function TesterBugList() {
               </span>
             </div>
             <div className={styles.stat}>
+              <span className={styles.statLabel}>In Progress</span>
+              <span className={styles.statValue}>
+                {bugs.filter(b => b.status === 'in-progress').length}
+              </span>
+            </div>
+            <div className={styles.stat}>
               <span className={styles.statLabel}>Resolved</span>
               <span className={styles.statValue}>
                 {bugs.filter(b => b.status === 'resolved').length}
               </span>
             </div>
-            <div className={styles.stat}>
-              <span className={styles.statLabel}>Unread</span>
-              <span className={styles.statValue}>
-                {bugs.filter(b => b.is_read === 0).length}
-              </span>
-            </div>
+          </div>
+
+          {/* Table Header */}
+          <div className={styles.tableHeader}>
+            <div className={styles.colId}>Bug ID</div>
+            <div className={styles.colTitle}>Title</div>
+            <div className={styles.colAssignee}>Assigned To</div>
+            <div className={styles.colDate}>Created</div>
+            <div className={styles.colStatus}>Status</div>
+            <div className={styles.colActions}>Actions</div>
           </div>
 
           <div className={styles.bugGrid}>
             {bugs.map((bug) => (
-              <div key={bug.bug_id} className={styles.bugCard}>
-                <div className={styles.cardHeader}>
-                  <div className={styles.bugId}>
-                    <Bug size={16} />
-                    <span>Bug #{bug.bug_id}</span>
-                  </div>
+              <div 
+                key={bug.bug_id} 
+                className={styles.bugCard}
+                onClick={() => navigate(`/tester/bug/${bug.bug_id}`)}
+              >
+                {/* Bug ID */}
+                <div className={styles.colId}>
+                  <span className={styles.bugId}>
+                    <Bug size={12} />
+                    #{bug.bug_id}
+                  </span>
                   {bug.is_read === 0 && (
                     <span className={styles.newBadge}>
-                      <Bell size={14} />
-                      New
+                      <Bell size={10} />
                     </span>
                   )}
                 </div>
 
-                <h3 className={styles.bugTitle}>{bug.title}</h3>
-                
-                <div className={styles.bugDescription}>
-                  <RichTextViewer content={bug.description} />
+                {/* Title */}
+                <div className={styles.colTitle}>
+                  <span className={styles.bugTitle}>{bug.title}</span>
                 </div>
 
-                {bug.screenshot && (
-                  <div className={styles.screenshotWrapper}>
-                    <ImageIcon size={16} />
-                    <img
-                      src={`http://localhost:5000/uploads/${bug.screenshot}`}
-                      className={styles.screenshot}
-                      alt="Bug Screenshot"
-                      onClick={() => window.open(`http://localhost:5000/uploads/${bug.screenshot}`, '_blank')}
-                    />
-                  </div>
-                )}
+                {/* Assignee */}
+                <div className={styles.colAssignee}>
+                  {bug.developer_name ? (
+                    <>
+                      <User size={14} className={styles.userIcon} />
+                      <span>{bug.developer_name}</span>
+                    </>
+                  ) : (
+                    <span className={styles.unassigned}>Unassigned</span>
+                  )}
+                </div>
 
-                <div className={styles.cardFooter}>
-                  <div className={`${styles.status} ${getStatusColor(bug.status)}`}>
+                {/* Date */}
+                <div className={styles.colDate}>
+                  <Calendar size={14} className={styles.dateIcon} />
+                  <span>{new Date(bug.created_at).toLocaleDateString()}</span>
+                </div>
+
+                {/* Status */}
+                <div className={styles.colStatus}>
+                  <span className={`${styles.status} ${getStatusColor(bug.status)}`}>
                     {getStatusIcon(bug.status)}
-                    <span>{bug.status}</span>
-                  </div>
-                  
+                    {bug.status}
+                  </span>
+                </div>
+
+                {/* Actions */}
+                <div className={styles.colActions}>
+                  <button
+                    className={styles.viewBtn}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/tester/bug/${bug.bug_id}`);
+                    }}
+                    title="View Details"
+                  >
+                    <Eye size={16} />
+                  </button>
                   <button
                     className={bug.is_read === 0 ? styles.newMsgBtn : styles.chatBtn}
-                    onClick={() => navigate(`/bug/${bug.bug_id}/chat`)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/bug/${bug.bug_id}/chat`);
+                    }}
+                    title="Open Chat"
                   >
-                    {bug.is_read === 0 ? (
-                      <>
-                        <Bell size={16} />
-                        New Message
-                      </>
-                    ) : (
-                      <>
-                        <MessageCircle size={16} />
-                        Open Chat
-                      </>
-                    )}
+                    {bug.is_read === 0 ? <Bell size={16} /> : <MessageCircle size={16} />}
                   </button>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Results Count */}
+          <div className={styles.resultsInfo}>
+            Showing {bugs.length} bug{bugs.length !== 1 ? 's' : ''}
           </div>
         </>
       )}

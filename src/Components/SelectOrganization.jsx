@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/axiosConfig";
+import Navbar from "./Navbar"; // Import the regular Navbar
 import {
   Building2,
   Plus,
@@ -21,6 +22,9 @@ function SelectOrganization() {
   const userName = localStorage.getItem("user_name") || "Admin";
 
   useEffect(() => {
+    localStorage.removeItem("org_id");
+    localStorage.removeItem("org_name");
+
     API.get(`/bugs/organization/admin/${adminId}`)
       .then((res) => {
         setOrgs(res.data || []);
@@ -45,6 +49,9 @@ function SelectOrganization() {
 
   return (
     <div className="select-org-page">
+      {/* Navbar - will automatically show minimal version */}
+      <Navbar />
+
       {/* Background Elements */}
       <div className="background-gradient"></div>
       <div className="background-pattern"></div>
@@ -144,11 +151,6 @@ function SelectOrganization() {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="select-org-footer">
-        <p>© 2024 BugTracker. All rights reserved.</p>
-      </footer>
     </div>
   );
 }

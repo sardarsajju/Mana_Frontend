@@ -1,6 +1,6 @@
-// Enhanced Navbar.jsx with lucide-react
+// Updated Navbar.jsx
 import React, { useContext, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { AuthContext } from "../context/AuthContext";
 import {
@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   List,
   User,
+  Users,
   LogOut,
   ChevronDown,
   Shield,
@@ -20,15 +21,35 @@ import {
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  // Check if user exists
   if (!user) return null;
 
-  const roleRoutes = {
-    admin: "/admin/dashboard",
+  // ✅ Hide navbar for Super Admin pages (they have their own sidebar)
+  if (location.pathname.startsWith("/super-admin")) {
+    return null;
+  }
+
+  // ✅ Hide navbar for super_admin role (in case they navigate elsewhere)
+  if (user.role === "super_admin") {
+    return null;
+  }
+
+  // Profile routes - separate from dashboard
+  const profileRoutes = {
+    admin: "/admin/profile",
     tester: "/tester/profile",
     developer: "/developer/profile",
+  };
+
+  // Dashboard/Home routes
+  const dashboardRoutes = {
+    admin: "/admin/dashboard",
+    tester: "/tester/dashboard",
+    developer: "/bugs",
   };
 
   const roleLabels = {
@@ -44,11 +65,16 @@ function Navbar() {
   };
 
   const goProfile = () => {
-    navigate(roleRoutes[user.role]);
+    navigate(profileRoutes[user.role]);
     setIsDropdownOpen(false);
   };
 
   const handleLogout = () => {
+    // Clear organization data when logging out
+    localStorage.removeItem('org_id');
+    localStorage.removeItem('org_name');
+    localStorage.removeItem('user_role');
+    
     logout();
     navigate("/");
   };
@@ -57,10 +83,50 @@ function Navbar() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Get organization name for display (optional)
+  const orgName = localStorage.getItem('org_name');
+
+  // ✅ MINIMAL NAVBAR FOR SELECT ORGANIZATION PAGE
+  if (location.pathname === "/admin/select-organization") {
+    return (
+      <nav className={styles.minimalNavbar}>
+        {/* Left - Logo */}
+        <div className={styles.logo}>
+          <Bug size={24} />
+          <span>Bug Tracker</span>
+        </div>
+
+        {/* Center - Admin Badge */}
+        <div className={styles.centerSection}>
+          <div className={styles.roleBadge}>
+            <Shield size={16} />
+            <span>Admin</span>
+          </div>
+        </div>
+
+        {/* Right - Logout */}
+        <button className={styles.minimalLogoutBtn} onClick={handleLogout}>
+          <LogOut size={20} />
+          <span>Logout</span>
+        </button>
+      </nav>
+    );
+  }
+
+  // Check if admin has selected an organization
+  if (user.role === 'admin') {
+    const orgId = localStorage.getItem('org_id');
+    if (!orgId) {
+      // Don't show navbar if admin hasn't selected an organization
+      return null;
+    }
+  }
+
+  // ✅ FULL NAVBAR FOR ALL OTHER PAGES
   return (
     <nav className={styles.navbar}>
       <div className={styles.leftSection}>
-        <div className={styles.logo} onClick={() => navigate(roleRoutes[user.role])}>
+        <div className={styles.logo} onClick={() => navigate(dashboardRoutes[user.role])}>
           <Bug size={24} />
           <span>Bug Tracker</span>
         </div>
@@ -71,6 +137,10 @@ function Navbar() {
         <div className={styles.roleBadge}>
           {roleIcons[user.role]}
           <span>{roleLabels[user.role]}</span>
+          {/* Optionally show org name for admin */}
+          {user.role === 'admin' && orgName && (
+            <span className={styles.orgBadge}> - {orgName}</span>
+          )}
         </div>
       </div>
 
@@ -78,10 +148,16 @@ function Navbar() {
       <div className={styles.rightSection}>
         {/* Admin Links */}
         {user.role === "admin" && (
-          <Link to="/admin/dashboard" className={styles.navLink}>
-            <LayoutDashboard size={18} />
-            <span>Dashboard</span>
-          </Link>
+          <>
+            <Link to="/admin/dashboard" className={styles.navLink}>
+              <LayoutDashboard size={18} />
+              <span>Dashboard</span>
+            </Link>
+            <Link to="/admin/users" className={styles.navLink}>
+              <Users size={18} />
+              <span>Users</span>
+            </Link>
+          </>
         )}
 
         {/* Tester Links */}
@@ -138,7 +214,7 @@ function Navbar() {
                 <User size={16} />
                 <span>Profile</span>
               </button>
-              <button className={styles.dropdownItem + ' ' + styles.logoutItem} onClick={handleLogout}>
+              <button className={`${styles.dropdownItem} ${styles.logoutItem}`} onClick={handleLogout}>
                 <LogOut size={16} />
                 <span>Logout</span>
               </button>
@@ -169,14 +245,24 @@ function Navbar() {
 
           <div className={styles.mobileNavLinks}>
             {user.role === "admin" && (
-              <Link
-                to="/admin/dashboard"
-                className={styles.mobileNavLink}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <LayoutDashboard size={20} />
-                <span>Dashboard</span>
-              </Link>
+              <>
+                <Link
+                  to="/admin/dashboard"
+                  className={styles.mobileNavLink}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <LayoutDashboard size={20} />
+                  <span>Dashboard</span>
+                </Link>
+                <Link
+                  to="/admin/users"
+                  className={styles.mobileNavLink}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Users size={20} />
+                  <span>Users</span>
+                </Link>
+              </>
             )}
 
             {user.role === "tester" && (
@@ -212,7 +298,7 @@ function Navbar() {
             )}
 
             <Link
-              to={roleRoutes[user.role]}
+              to={profileRoutes[user.role]}
               className={styles.mobileNavLink}
               onClick={() => setIsMobileMenuOpen(false)}
             >

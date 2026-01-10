@@ -28,7 +28,7 @@ function SuperAdminLogin() {
       const res = await API.post("/auth/login", form);
 
       // Only allow admin users for super admin access
-      if (res.data.role !== "admin") {
+      if (res.data.role !== "super_admin") {
         setError("Access denied. Only administrators can access the Super Admin panel.");
         setIsLoading(false);
         return;
