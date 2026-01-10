@@ -41,6 +41,11 @@ export default function HomePage() {
     const [loading, setLoading] = useState(true);
     const [balanceVisible, setBalanceVisible] = useState(false);
     const [activeMenu, setActiveMenu] = useState('dashboard');
+    const [summary, setsummary] = useState({
+        income: 0,
+        expense: 0,
+        savings: 0
+    })
 
     // Fetch user profile
     useEffect(() => {
@@ -78,15 +83,44 @@ export default function HomePage() {
         navigate(path);
     };
     useEffect(() => {
-        axios.get(`${API_URL}/transcations/gettranscations/${user_id}`)
-            .then((res) => {
-                setRecentTransactions(res.data.transactions)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        if (!user_id) return;
 
-    })
+        axios
+            .get(`${API_URL}/transcations/gettranscations/${user_id}`)
+            .then((res) => {
+                const transactions = res.data.transactions || [];
+                setRecentTransactions(transactions);
+
+                const currentMonth = new Date().getMonth();
+                const currentYear = new Date().getFullYear();
+
+                let income = 0;
+                let expenses = 0;
+
+                transactions.forEach(txn => {
+                    const txnDate = new Date(txn.date);
+
+                    if (
+                        txnDate.getMonth() === currentMonth &&
+                        txnDate.getFullYear() === currentYear
+                    ) {
+                        if (txn.type === "credit") {
+                            income += Number(txn.amount);
+                        } else {
+                            expenses += Number(txn.amount);
+                        }
+                    }
+                });
+
+                setsummary({
+                    income,
+                    expenses,
+                    savings: income - expenses
+                });
+            })
+            .catch(err => console.log(err));
+    }, [user_id]);
+
 
     if (loading) {
         return (
@@ -108,7 +142,7 @@ export default function HomePage() {
     return (
         <div className={styles.homeContainer}>
 
-     
+
 
             <div className={styles.mainLayout}>
 
@@ -142,11 +176,11 @@ export default function HomePage() {
 
                         <button
                             className={`${styles.menuItem} ${activeMenu === 'profile' ? styles.active : ''}`}
-                           onClick={() => navigate('/deposit')}
+                            onClick={() => navigate('/deposit')}
                         >
                             <FaMoneyBillTransfer size={20} />
                             <span>Transfer Money</span>
-                        </button> 
+                        </button>
                         <button
                             className={styles.menuItem}
                             onClick={() => alert("Settings coming soon")}
@@ -174,10 +208,10 @@ export default function HomePage() {
                             <h1 className={styles.welcomeTitle}>Welcome back, {profile.FirstName}!</h1>
                             <p className={styles.welcomeSubtitle}>Here's what's happening with your account today.</p>
                         </div>
-                        <div className={styles.dateInfo}>
+                        {/* <div className={styles.dateInfo}>
                             <Clock size={16} />
                             <span>{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                        </div>
+                        </div> */}
                     </div>
 
                     {/* Balance Card */}
@@ -294,35 +328,58 @@ export default function HomePage() {
                             <h2 className={styles.cardTitle}>Account Summary</h2>
 
                             <div className={styles.summaryItems}>
+
+                                {/* This Month */}
                                 <div className={styles.summaryItem}>
-                                    <div className={styles.summaryIcon} style={{ backgroundColor: '#28a74515', color: '#28a745' }}>
+                                    <div
+                                        className={styles.summaryIcon}
+                                        style={{ backgroundColor: '#28a74515', color: '#28a745' }}
+                                    >
                                         <TrendingUp size={20} />
                                     </div>
+
                                     <div className={styles.summaryContent}>
                                         <span className={styles.summaryLabel}>This Month</span>
-                                        <span className={styles.summaryValue}>+₹65,000</span>
+                                        <span className={styles.summaryValue}>
+                                            +₹{(summary.income ?? 0).toLocaleString("en-IN")}
+                                        </span>
                                     </div>
                                 </div>
 
+
                                 <div className={styles.summaryItem}>
-                                    <div className={styles.summaryIcon} style={{ backgroundColor: '#ff660015', color: '#ff6600' }}>
+                                    <div
+                                        className={styles.summaryIcon}
+                                        style={{ backgroundColor: '#ff660015', color: '#ff6600' }}
+                                    >
                                         <ArrowUpRight size={20} />
                                     </div>
+
                                     <div className={styles.summaryContent}>
                                         <span className={styles.summaryLabel}>Expenses</span>
-                                        <span className={styles.summaryValue}>₹18,500</span>
+                                        <span className={styles.summaryValue}>
+                                            ₹{(summary.expenses ?? 0).toLocaleString("en-IN")}
+                                        </span>
                                     </div>
                                 </div>
 
+
+                                {/* Savings */}
                                 <div className={styles.summaryItem}>
-                                    <div className={styles.summaryIcon} style={{ backgroundColor: '#004c8c15', color: '#004c8c' }}>
+                                    <div
+                                        className={styles.summaryIcon}
+                                        style={{ backgroundColor: '#004c8c15', color: '#004c8c' }}
+                                    >
                                         <Wallet size={20} />
                                     </div>
                                     <div className={styles.summaryContent}>
                                         <span className={styles.summaryLabel}>Savings</span>
-                                        <span className={styles.summaryValue}>₹46,500</span>
+                                        <span className={styles.summaryValue}>
+                                            ₹{summary.savings.toLocaleString("en-IN")}
+                                        </span>
                                     </div>
                                 </div>
+
                             </div>
 
                             <div className={styles.contactSection}>
@@ -339,6 +396,7 @@ export default function HomePage() {
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                     {/* Security Notice */}

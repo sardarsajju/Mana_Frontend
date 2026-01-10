@@ -58,7 +58,7 @@ function Singuppage() {
     console.log(payload.Bank_id);
     try {
       const res = await axios.post(
-        "http://localhost:5002/api/register",
+        "http://localhost:5004/api/register",
         payload
       );
 

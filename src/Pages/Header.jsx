@@ -23,8 +23,6 @@ function Header(){
                     }
                 } catch (error) {
                     console.log("Error fetching profile:", error);
-                } finally {
-                    setLoading(false);
                 }
             }
             if (user_id) getProfile();

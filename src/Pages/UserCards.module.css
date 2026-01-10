@@ -1,427 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600;700&display=swap');
+
 .container {
-    padding: 30px;
-    background-color:white;
     min-height: 100vh;
+    padding: 50px 20px;
+    font-family: 'Rajdhani', sans-serif;
 }
 
 .heading {
-    font-size: 32px;
-    margin-bottom: 30px;
-    color: #1a1a1a;
-    font-weight: 600;
+    /* text-align: center; */
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 50px;
+    color: #1a1a2e;
 }
-.cardWrapper {
-    perspective: 1000px;
+
+.applyBtn {
+    margin: auto;
+    display: block;
+    padding: 16px 40px;
+    font-size: 18px;
+    border-radius: 14px;
+    border: none;
+    color: #fff;
+    background: linear-gradient(135deg, #667eea, #764ba2);
     cursor: pointer;
 }
 
-.cardInner {
-    position: relative;
-    width: 320px;
-    height: 200px;
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
-}
-
-.flipped {
-    transform: rotateY(180deg);
-}
-
-.cardFront,
-.cardBack {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 16px;
-}
-
-.cardBack {
-    background: #1c1c1c;
-    color: #fff;
-    transform: rotateY(180deg);
-    padding: 20px;
-}
-
-.blackStrip {
-    height: 40px;
-    background: black;
-    margin-bottom: 25px;
-}
-
-.cvvBox {
-    background: white;
-    color: black;
-    width: 120px;
-    padding: 8px;
-    margin-left: auto;
-    text-align: right;
-    border-radius: 4px;
-}
-
-.cvvNote {
-    font-size: 12px;
-    opacity: 0.7;
-    margin-top: 20px;
-}
-
-/* Grid */
 .cardGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 30px;
+    /* display: flex; */
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
 }
 
-/* Base Card */
+/* CARD */
 .card {
-    height: 230px;
-    width: 100%;
-    max-width: 400px;
-    border-radius: 16px;
-    padding: 25px;
+    width: 380px;
+    height: 240px;
+    padding: 28px;
+    border-radius: 22px;
+    color: #fff;
     position: relative;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.18);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: transform 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px);
 }
 
-/* Card Pattern Overlay */
-.cardPattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.1;
-    pointer-events: none;
-}
-
-/* Bank Name */
-.bankName {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    position: relative;
-    z-index: 2;
-}
-
-/* Chip Styles */
-.chip {
-    position: absolute;
-    top: 60px;
-    left: 25px;
-    width: 50px;
-    height: 40px;
-    background: linear-gradient(135deg, #f6e6b4 0%, #ed9f3b 30%, #f6e6b4 50%, #ed9f3b 70%, #f6e6b4 100%);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.chipLine1, .chipLine2, .chipLine3, .chipLine4 {
-    position: absolute;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.chipLine1 {
-    top: 8px;
-    left: 0;
-    right: 0;
-    height: 1px;
-}
-
-.chipLine2 {
-    top: 16px;
-    left: 0;
-    right: 0;
-    height: 1px;
-}
-
-.chipLine3 {
-    top: 24px;
-    left: 0;
-    right: 0;
-    height: 1px;
-}
-
-.chipLine4 {
-    top: 32px;
-    left: 0;
-    right: 0;
-    height: 1px;
-}
-
-/* Contactless Symbol */
-.contactless {
-    position: absolute;
-    top: 60px;
-    left: 85px;
-    width: 30px;
-    height: 30px;
-    transform: rotate(90deg);
-}
-
-.contactlessWave {
-    position: absolute;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-}
-
-.contactlessWave:nth-child(1) {
-    width: 8px;
-    height: 8px;
-    top: 11px;
-    left: 11px;
-}
-
-.contactlessWave:nth-child(2) {
-    width: 14px;
-    height: 14px;
-    top: 8px;
-    left: 8px;
-    border-top-color: transparent;
-    border-left-color: transparent;
-}
-
-.contactlessWave:nth-child(3) {
-    width: 20px;
-    height: 20px;
-    top: 5px;
-    left: 5px;
-    border-top-color: transparent;
-    border-left-color: transparent;
-}
-
-.contactlessWave:nth-child(4) {
-    width: 26px;
-    height: 26px;
-    top: 2px;
-    left: 2px;
-    border-top-color: transparent;
-    border-left-color: transparent;
-}
-
-/* Card Number */
-.cardNumber {
-    margin: 120px 0 25px;
-    font-size: 24px;
-    letter-spacing: 2px;
-    font-family: 'Courier New', monospace;
+/* TOP */
+.topRow {
     display: flex;
-    gap: 12px;
-    position: relative;
-    z-index: 2;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.cardNumberGroup {
-    display: inline-block;
+.bankName {
+    font-size: 17px;
+    font-weight: 700;
 }
 
-/* Footer */
+.cardType {
+    font-size: 11px;
+    letter-spacing: 1.4px;
+}
+
+/* CHIP */
+.chipRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chip {
+    width: 52px;
+    height: 40px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, gold, #ffea70);
+}
+
+.network {
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+/* NUMBER */
+.cardNumber {
+    text-align: center;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 3px;
+    font-size: 23px;
+}
+
+/* FOOTER */
 .cardFooter {
     display: flex;
-    gap: 40px;
-    position: relative;
-    z-index: 2;
-}
-
-.cardInfo {
-    flex: 1;
+    justify-content: space-between;
 }
 
 .label {
-    font-size: 10px;
-    opacity: 0.7;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-}
-
-.value {
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-}
-
-/* Network Logo */
-.network {
-    position: absolute;
-    bottom: 25px;
-    right: 25px;
-    z-index: 2;
-}
-
-.networkLogo {
-    height: 35px;
-    width: auto;
-    color: white;
-}
-
-.networkText {
-    font-size: 18px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    font-style: italic;
-}
-
-/* Card Type */
-.cardType {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 1.2px;
     opacity: 0.8;
 }
 
-/* Bank-specific Designs */
-
-/* Chase */
-.chase {
-    background: linear-gradient(135deg, #0d4f8b 0%, #003a70 100%);
-    color: white;
+.value {
+    font-size: 14px;
+    font-weight: 700;
 }
 
-.chase .cardPattern {
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.05) 10px, rgba(255, 255, 255, 0.05) 20px);
+/* BANK COLORS */
+.sbi {
+    background: linear-gradient(135deg, #ff6b35, #004e89);
 }
-
-/* Bank of America */
-.bofa {
-    background: linear-gradient(135deg, #dd1f2d 0%, #b71c1c 100%);
-    color: white;
+.hdfc {
+    background: linear-gradient(135deg, #ed232a, #004c8f);
 }
-
-.bofa .cardPattern {
-    background-image: radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+.icici {
+    background: linear-gradient(135deg, #f7941e, #6a1b4d);
 }
-
-/* Wells Fargo */
-.wellsfargo {
-    background: linear-gradient(135deg, #d52b1e 0%, #ffc40c 100%);
-    color: white;
+.axis {
+    background: linear-gradient(135deg, #97144d, #560027);
 }
-
-/* Citi */
-.citi {
-    background: linear-gradient(135deg, #0066b2 0%, #004a8f 100%);
-    color: white;
+.kotak {
+    background: linear-gradient(135deg, #ed1c24, #a00000);
 }
-
-.citi .cardPattern {
-    background-image: repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255, 255, 255, 0.03) 50px, rgba(255, 255, 255, 0.03) 100px);
-}
-
-/* Capital One */
-.capitalone {
-    background: linear-gradient(135deg, #d92228 0%, #9e1b20 100%);
-    color: white;
-}
-
-.capitalone .cardPattern {
-    background-image: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-}
-
-/* American Express */
-.amex {
-    background: linear-gradient(135deg, #1c7ddb 0%, #0066cc 100%);
-    color: white;
-}
-
-.amex .cardPattern {
-    background-image: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255, 255, 255, 0.05) 20px, rgba(255, 255, 255, 0.05) 40px);
-}
-
-/* Discover */
-.discover {
-    background: linear-gradient(135deg, #ff6600 0%, #ff8800 50%, #ff6600 100%);
-    color: white;
-}
-
-.discover .cardPattern {
-    background-image: radial-gradient(ellipse at top right, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
-}
-
-/* US Bank */
-.usbank {
-    background: linear-gradient(135deg, #0c2340 0%, #c8102e 100%);
-    color: white;
-}
-
-/* PNC */
-.pnc {
-    background: linear-gradient(135deg, #ff6900 0%, #0066a1 100%);
-    color: white;
-}
-
-/* TD Bank */
-.tdbank {
-    background: linear-gradient(135deg, #34a235 0%, #165c16 100%);
-    color: white;
-}
-
-/* Goldman Sachs (Apple Card) */
-.goldmansachs, .apple {
-    background: linear-gradient(135deg, #ffffff 0%, #e8e8ed 100%);
-    color: #1d1d1f;
-}
-
-.goldmansachs .chip, .apple .chip {
-    background: linear-gradient(135deg, #c0c0c4 0%, #86868b 30%, #c0c0c4 50%, #86868b 70%, #c0c0c4 100%);
-}
-
-.goldmansachs .networkLogo, .apple .networkLogo {
-    color: #1d1d1f;
-}
-
-.goldmansachs .contactlessWave, .apple .contactlessWave {
-    border-color: rgba(0, 0, 0, 0.3);
-}
-
-/* Default Card */
 .defaultCard {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .cardGrid {
-        grid-template-columns: 1fr;
-    }
-    
-    .card {
-        max-width: 100%;
-    }
-}
-
+/* MOBILE */
 @media (max-width: 480px) {
     .card {
-        height: 200px;
-        padding: 20px;
-    }
-    
-    .cardNumber {
-        font-size: 20px;
-        margin: 100px 0 20px;
-    }
-    
-    .chip {
-        width: 45px;
-        height: 35px;
-        top: 50px;
-    }
-    
-    .contactless {
-        top: 50px;
-        left: 75px;
+        width: 100%;
+        max-width: 340px;
     }
 }
